@@ -13,18 +13,15 @@ const Backgraund = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 100px 20px;
-
+  padding: 100px 0;
 
   @media (max-width: 768px) {
-  width: 738px;
+  max-width: 768px;
     height: auto;
-    padding: 60px 15px;
   }
   @media (max-width: 425px) {
-     max-width: 375px;
+     max-width: 425px;
     height: auto;
-    padding: 30px 0px;
   }
 
 `
@@ -64,12 +61,12 @@ const Text = styled.p`
   font-size: 24px;
   line-height: 1.2;
   color: #fff;
-  width: 164px;
+  max-width: 164px;
   @media (max-width: 768px) {
 font-size: 14px;
 }
   @media (max-width: 425px) {
-  width:69px;
+  max-width:69px;
   font-size: 10px;
   }
 `;
@@ -81,14 +78,14 @@ const Right = styled.p`
   line-height: 1.2;
   text-align: right;
   color: #fff;
-  width: 345px;
+  max-width: 345px;
   @media (max-width: 768px) {
 font-size: 14px;
-width: 172px;
+max-width: 172px;
 }
   @media (max-width: 425px) {
   font-size: 10px;
-  width: 136px;
+  max-width: 136px;
   text-align: left;
   }
 `;
@@ -136,31 +133,31 @@ border-radius: 5px;
 const Button = styled.button`
 border-left: 2px solid #000;
 border-radius: 0 10px 10px 0;
-width: 45px;
+max-width: 45px;
 height: 100%;
 background: #ffb36c;
   position: absolute;
   right: 0px;
   top: 0px;
         @media (max-width: 768px) {
-width: 28px;
+max-width: 28px;
 }
   @media (max-width: 425px) {
-width: 16px;
+max-width: 16px;
 border-radius: 0 5px 5px 0;
-top: 4px;
+top: 0px;
   }
 `
 const Search = styled.div`
 margin-top: 80px;
   position: relative;
-  width: 625px;
+  max-width: 625px;
       @media (max-width: 768px) {
-width: 402px;
+max-width: 402px;
 height: 33px;
 }
   @media (max-width: 425px) {
-width: 173px;
+max-width: 173px;
 height: 20px;
   }
 `;

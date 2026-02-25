@@ -14,7 +14,7 @@ display: flex;
   right: 50px;
         @media (max-width: 768px) {
 border-radius: 25px;
-width: 250px;
+max-width: 250px;
 height: 200px;
 }
 `
@@ -69,7 +69,7 @@ top:0;
 
 const Button = styled.button`
 display: ${props => (props.isLogin ? "none" : "flex")};
-width: 89px;
+max-width: 89px;
 height: 35px;
 border-radius: 10px;
 padding-top: 10px;
@@ -82,7 +82,7 @@ margin: 10px;
   @media (max-width: 768px) {
 border-radius: 10px;
 padding: 8px 16px;
-width: 73px;
+max-width: 73px;
 height: 28px;
 font-size: 10px;
   }

@@ -8,7 +8,6 @@ import { useState } from "react";
 
 const Container = styled.div`
   max-width: 1140px;
-  width: 100%;
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
@@ -102,40 +101,40 @@ color: #000;
 `
 
 const Box = styled.div`
-width: 260px;
+max-width: 260px;
 display: flex;
 justify-content: space-between;
 margin-top: 10px;
 margin-bottom: 15px;
       @media (max-width: 768px) {
-width: 212px;
+max-width: 212px;
 }
 `
 
 const Sun = styled.img`
-width: 120px;
+max-width: 120px;
 height: 120px;
       @media (max-width: 768px) {
-width: 76px;
+max-width: 76px;
 height: 76px;
 }
 `
 
 const Img = styled.img`
-width: 30px;
+max-width: 30px;
 height: 30px;
       @media (max-width: 768px) {
-width: 24px;
+max-width: 24px;
 height: 24px;
 }
 `
 
 const Div = styled.div`
-width: 280px;
+max-width: 280px;
 display: flex;
 justify-content: space-between;
       @media (max-width: 768px) {
-width: 230px;
+max-width: 230px;
 }
 `
 
@@ -176,6 +175,7 @@ const postCity = async (city) => {
 };
     return (
         <>
+         <div className="container">
             <Container >
                 <List>
                     {data.map((item, index) => (
@@ -225,6 +225,7 @@ const postCity = async (city) => {
                     ))}
                 </List>
             </Container>
+</div>
           <Table open={isOpen} setOpen={setIsOpen} data={currentCity}></Table>
         </>
     );

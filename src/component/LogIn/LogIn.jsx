@@ -11,12 +11,12 @@ display: flex;
   align-items: center;
         @media (max-width: 768px) {
 border-radius: 25px;
-width: 400px;
+max-width: 400px;
 height: 440px;
 }
     @media (max-width: 425px) {
 border-radius: 25px;
-width: 293px;
+max-width: 293px;
 height: 454px;
   }
 `
@@ -44,19 +44,19 @@ font-size:12px;
 const Input = styled.input`
 border: 2px solid ${props => props.error ? "red" : "transparent"};
 border-radius: 10px;
-width: 440px;
+max-width: 440px;
 height: 50px;
 background: #e4e4e4;
 margin-top:16px;
 margin-bottom:30px;
       @media (max-width: 768px) {
 border-radius: 10px;
-width: 310px;
+max-width: 310px;
 height: 40px;
 }
     @media (max-width: 425px) {
 border-radius: 10px;
-width: 243px;
+max-width: 243px;
 height: 40px;
   }
 `
@@ -65,7 +65,7 @@ const Button = styled.button`
 margin-top:35px;
 border-radius: 10px;
 padding: 10px 30px;
-width: 114px;
+max-width: 114px;
 height: 37px;
 background: #ffb36c;
 font-family: var(--font-family);

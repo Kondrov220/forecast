@@ -14,7 +14,9 @@ background: #ffb36c;
   display: flex;
     align-items: center;
                   @media (max-width: 768px) {
-  padding-left: 100px;
+                  max-width: 768px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
     @media (max-width: 425px) {
     flex-direction:column;
@@ -25,10 +27,10 @@ background: #ffb36c;
 `
 
 const Logo = styled.img`
-width: 90px;
+max-width: 90px;
 height: 62px;
   @media (max-width: 425px) {
-width: 50px;
+max-width: 50px;
 height: 34px;
   position: absolute;
   left: 50px;
@@ -61,14 +63,14 @@ gap:20px;
 `
 
 const Box = styled.div`
-margin-left: 100px;
+margin-left: auto;
   @media (max-width: 425px) {
 margin-left: 75px;
     flex-direction:column;
      display:flex;
         justify-content: center;
   align-items: center; 
-  width: 145px;
+  max-width: 145px;
 height: 67px;
   }
 `
@@ -76,6 +78,7 @@ height: 67px;
 
 function Footer() {
   return (
+    
     <Foot>
       <Logo src={logo} alt="" />
       <Box>

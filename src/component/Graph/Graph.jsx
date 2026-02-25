@@ -18,23 +18,24 @@ const Container = styled.div`
 
 const Box = styled.div`
 border-radius: 20px;
-width: 1140px;
+max-width: 1140px;
 height: 554px;
 background: #e8e8e8;
         @media (max-width: 768px) {
 border-radius: 15px;
-width: 634px;
+max-width: 634px;
 height: 400px;
 }
 `
 
 function Graph() {
   return (
+     <div className="container">
     <Container>
       <Box>
         <p>Hourly forecast</p>
         </Box>
-    </Container>
+    </Container></div>
   );
 }
 

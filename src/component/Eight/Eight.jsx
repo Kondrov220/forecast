@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import "../../App.css"
 import clouds from '../../img/clouds.png'
 import overcast from '../../img/overcast.png'
 import rain from '../../img/rain.png'
@@ -8,7 +8,6 @@ import clear from '../../img/clear.png'
 
 const Container = styled.div`
   max-width: 1140px;
-  width: 100%;
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
@@ -28,6 +27,7 @@ flex-wrap: wrap;
 justify-content: center;
 align-items: center;
 gap: 10px;
+padding: 0 15px;
         @media (max-width: 768px) {
 gap:15px;
 }
@@ -36,7 +36,8 @@ gap:15px;
 
 const Li = styled.li`
 border-radius: 10px;
-width: 886px;
+max-width: 886px;
+width:100%;
 height: 47px;
 background: #d9d9d9;
 display: flex;
@@ -44,7 +45,7 @@ align-items: center;
 padding:0 50px;
         @media (max-width: 768px) {
 border-radius: 10px;
-width: 564px;
+max-width: 544px;
 height: 40px;
 padding:0 10px;
 }
@@ -143,6 +144,7 @@ font-size:10px;
 
 function Eight() {
   return (
+    <div className="container">
     <Container>
         <Eigh>
  <Title>8-day forecast</Title>
@@ -215,6 +217,7 @@ function Eight() {
         </Ul>
         </Eigh>
     </Container>
+    </div>
   );
 }
 

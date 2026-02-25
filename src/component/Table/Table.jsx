@@ -9,7 +9,6 @@ import wind from '../../img/wind.png'
 
 const Container = styled.div`
   max-width: 1140px;
-  width: 100%;
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
@@ -26,8 +25,7 @@ const Container = styled.div`
 
 const Ul = styled.ul`
 border-radius: 20px;
-width: 1140px;
-height: 474px;
+max-width: 1140px;
 background: #e8e8e8;
 display: flex;
 flex-wrap: wrap;
@@ -39,17 +37,15 @@ padding-top: 40px;
 padding-bottom: 40px;
       @media (max-width: 768px) {
 border-radius: 15px;
-width: 634px;
-height: 490px;
+max-width: 634px;
 gap:20px;
-row-gap:0px;
+row-gap:20px;
 padding-top: 30px;
 padding-bottom: 30px;
 }
   @media (max-width: 425px) {
 border-radius: 15px;
-width: 293px;
-height: 1205px;
+max-width: 293px;
   }
 `
 
@@ -99,10 +95,10 @@ font-size: 16px;
 `
 
 const Img = styled.img`
-width: 85px;
+max-width: 85px;
 height: 85px;
       @media (max-width: 768px) {
-width:60px;
+max-width:60px;
 height:60px;
 }
 `
@@ -111,6 +107,7 @@ height:60px;
 function Table({open, isOpen, data}) {
      if (!data) return null;
   return (
+     <div className="container">
     <Container open={open}>
         <Ul>
             <Li>
@@ -145,7 +142,7 @@ function Table({open, isOpen, data}) {
                 <Img src={visibility} alt="" />
             </Li>
         </Ul>
-    </Container>
+    </Container></div>
   );
 }
 

@@ -13,7 +13,6 @@ padding: 15px 0;
 const Container = styled.div`
 position: reletive;
   max-width: 1140px;
-  width: 100%;
   margin: 0 auto;
   padding-left: 15px;
   padding-right: 15px;
@@ -21,8 +20,8 @@ position: reletive;
       justify-content: center;
     align-items: center;
       @media (max-width: 768px) {
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 10px;
+  padding-right: 10px;
       max-width: 568px;
   }
   @media (max-width: 425px) {
@@ -33,18 +32,18 @@ position: reletive;
 `;
 
 const Logo = styled.img`
-width: 82px;
+max-width: 82px;
 height: 56px;
   @media (max-width: 768px) {
-width: 54px;
+max-width: 54px;
 height: 36px;
   }
   @media (max-width: 425px) {
-  width: 34px;
+  max-width: 34px;
 height: 22px;}
 `
 const Box = styled.ul`
-margin-left: 100px;
+margin-left: auto;
 margin-right: auto;
 display: flex;
 justify-content: center;
@@ -56,7 +55,7 @@ display:none;
 `
 const Button = styled.button`
 display: ${props => (props.isLogin ? "none" : "flex")};
-width: 89px;
+max-width: 89px;
 height: 35px;
 border-radius: 10px;
 padding-top: 10px;
@@ -69,7 +68,7 @@ margin: 10px;
   @media (max-width: 768px) {
 border-radius: 10px;
 padding: 8px 16px;
-width: 73px;
+max-width: 73px;
 height: 28px;
 font-size: 10px;
   }
@@ -88,12 +87,12 @@ border-radius: 100%;
 `
 
 const IconButton = styled.button`
-width: 50px;
+max-width: 50px;
 height: 50px;
 background: transparent;
 border-radius: 100%;
   @media (max-width: 768px) {
-width: 40px;
+max-width: 40px;
 height: 40px;
   }
   @media (max-width: 425px) {
@@ -171,7 +170,7 @@ background: #FFB36C;
 margin: 10px;
 border-radius: 10px;
 padding: 8px 16px;
-width: 73px;
+max-width: 73px;
 height: 28px;
 font-size: 10px;
  
@@ -191,7 +190,7 @@ const IconButtonMenu = styled.button`
 display:none;
   @media (max-width: 425px) {
 display:flex;
-width: 40px;
+max-width: 40px;
 height: 40px;
 background: transparent;
 border-radius: 100%;
@@ -219,6 +218,7 @@ const [menu, setMenu] = useState(false);
 
   return (
     <HeaderBox>
+       <div className="container">
       <Container>
         <Logo src={logo} alt="logo" />
         <Box>
@@ -270,6 +270,7 @@ const [menu, setMenu] = useState(false);
 <Log open={isLoginOpen} setOpen={setIsLoginOpen} isLogin={isLogin} setIsLogin={setIsLogin}/>
       <Acount openA={isAcountOpen} setOpenA={setIsAcountOpen}  isLogin={isLogin} setIsLogin={setIsLogin} open={isOpen}  setOpen={setIsOpen}
       />
+      </div>
     </HeaderBox>
   );
 }
