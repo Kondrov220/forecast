@@ -5,14 +5,21 @@ import Weather from './component/Weather/Weather';
 import Pets from './component/Pets/Pets';
 import Nature from './component/Nature/Nature';
 import Footer from './component/Footer/Footer';
+import Eight from './component/Eight/Eight';
+import Table from './component/Table/Table';
+import Graph from './component/Graph/Graph';
+import { useState } from 'react';
 function App() {
+const [isLogin, setIsLogin] = useState(false);
+
   return (
     <div className="App">
-      <Header></Header>
+      <Header isLogin={isLogin} setIsLogin={setIsLogin}></Header>
       <Hero></Hero>
-      <Weather></Weather>
+      {/* <Graph></Graph> */}
+      <Eight></Eight>
       <Pets></Pets>
-      <Nature></Nature>
+      {/* <Nature></Nature> */}
       <Footer></Footer>
     </div>
   );
