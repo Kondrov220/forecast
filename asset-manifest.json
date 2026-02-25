@@ -1,23 +1,19 @@
 {
   "files": {
-    "main.css": "/forecast/static/css/main.46edc12d.css",
-    "main.js": "/forecast/static/js/main.2a1b6b5f.js",
+    "main.css": "/forecast/static/css/main.ec6adfb8.css",
+    "main.js": "/forecast/static/js/main.160fdd1f.js",
     "static/media/hero.jpg": "/forecast/static/media/hero.0a8af12bc322a5ac929b.jpg",
-    "static/media/man.png": "/forecast/static/media/man.52d1f5e5994c81ddf3b4.png",
-    "static/media/cat.png": "/forecast/static/media/cat.6b2faab5f652f0c9afcd.png",
-    "static/media/dog.png": "/forecast/static/media/dog.20612d1f7b1e306102aa.png",
-    "static/media/ghosts.png": "/forecast/static/media/ghosts.27c6510a37889c2e4d0a.png",
     "static/media/heart.png": "/forecast/static/media/heart.32397ef127ffe8894991.png",
     "static/media/sun.png": "/forecast/static/media/sun.e2995de46c8a0609a6ef.png",
     "static/media/icon.png": "/forecast/static/media/icon.a6143582309785dca610.png",
     "static/media/pressure.png": "/forecast/static/media/pressure.6738a440949c9e966d1d.png",
     "static/media/reset.png": "/forecast/static/media/reset.8304a958dcdf2d47801f.png",
     "index.html": "/forecast/index.html",
-    "main.46edc12d.css.map": "/forecast/static/css/main.46edc12d.css.map",
-    "main.2a1b6b5f.js.map": "/forecast/static/js/main.2a1b6b5f.js.map"
+    "main.ec6adfb8.css.map": "/forecast/static/css/main.ec6adfb8.css.map",
+    "main.160fdd1f.js.map": "/forecast/static/js/main.160fdd1f.js.map"
   },
   "entrypoints": [
-    "static/css/main.46edc12d.css",
-    "static/js/main.2a1b6b5f.js"
+    "static/css/main.ec6adfb8.css",
+    "static/js/main.160fdd1f.js"
   ]
 }
