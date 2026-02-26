@@ -102,6 +102,7 @@ function Pets() {
         setArticles(data.articles || []);
       })
       .catch(err => console.log(err));
+      getImages();
   }, []);
 
   const getImages = async () => {

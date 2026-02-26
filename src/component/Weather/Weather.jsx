@@ -102,6 +102,7 @@ color: #000;
 
 const Box = styled.div`
 max-width: 260px;
+width:100%;
 display: flex;
 justify-content: space-between;
 margin-top: 10px;
@@ -131,10 +132,12 @@ height: 24px;
 
 const Div = styled.div`
 max-width: 280px;
+width:100%;
 display: flex;
 justify-content: space-between;
       @media (max-width: 768px) {
 max-width: 230px;
+width:100%;
 }
 `
 
