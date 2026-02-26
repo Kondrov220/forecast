@@ -16,10 +16,9 @@ const [isLogin, setIsLogin] = useState(false);
     <div className="App">
       <Header isLogin={isLogin} setIsLogin={setIsLogin}></Header>
       <Hero></Hero>
-      {/* <Graph></Graph> */}
       <Eight></Eight>
       <Pets></Pets>
-      {/* <Nature></Nature> */}
+      <Nature></Nature>
       <Footer></Footer>
     </div>
   );

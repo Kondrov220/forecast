@@ -174,6 +174,8 @@ height: 9px;
 function App() {
  const [value, setValue] = useState();
  const [data, setData] = useState([]);
+ const [lat, setLat] = useState(null);
+const [lon, setLon] = useState(null);
   const API_KEY = "22e30256a6bc217554b8155e50f42d6c";
 const getCoordinates = async () => {
   if (!value) return;
@@ -192,7 +194,8 @@ const getCoordinates = async () => {
 
     const { lat, lon, name: cityName, country } = geoData[0];
 
-
+    setLat(lat);
+    setLon(lon);
     const weatherRes = await fetch(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
     );
@@ -212,7 +215,6 @@ const getCoordinates = async () => {
         visibility: weatherData.visibility
       }
     ]);
-
   const savedUser = JSON.parse(localStorage.getItem("user"));
 
 if (savedUser) {
@@ -254,7 +256,7 @@ if (savedUser) {
       </Search>
       
     </Backgraund>
-    <Weather data={data}></Weather>
+    <Weather data={data} lat={lat} lon={lon}></Weather>
 </>
   );
 }

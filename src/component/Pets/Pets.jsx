@@ -92,11 +92,8 @@ function Pets() {
   const [articles, setArticles] = useState([]);
   const [page, setPage] = useState(1);
 
-  const PIXABAY_KEY = "50978158-2e1c075068d4fb19bda657fd9";
-  const NEWS_KEY = "ef3e8b523a8342f999fac3a0887c1d2f";
-
   useEffect(() => {
-    fetch(`https://newsapi.org/v2/everything?q=dog&apiKey=${NEWS_KEY}`)
+    fetch(`https://newsapi.org/v2/everything?q=dog&apiKey=ef3e8b523a8342f999fac3a0887c1d2f`)
       .then(res => res.json())
       .then(data => {
         setArticles(data.articles || []);
@@ -108,12 +105,13 @@ function Pets() {
   const getImages = async () => {
     try {
       const res = await fetch(
-        `https://pixabay.com/api/?q=dogs&page=${page}&key=${PIXABAY_KEY}&image_type=photo&orientation=horizontal&per_page=4`
+        `https://pixabay.com/api/?q=dogs&page=${page}&key=50978158-2e1c075068d4fb19bda657fd9&image_type=photo&orientation=horizontal&per_page=4`
       );
 
       const data = await res.json();
 
       setImages(prev => [...prev, ...data.hits]);
+      console.log(images);
       setPage(prev => prev + 1);
 
     } catch (error) {

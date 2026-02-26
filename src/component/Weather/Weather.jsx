@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Table from "../Table/Table";
+import Graph from "../Graph/Graph";
 import sun from '../../img/sun.png'
 import reset from '../../img/reset.png'
 import heart from '../../img/heart.png'
@@ -155,7 +156,7 @@ margin-top: 15px;
 margin-bottom: 20px;
 `
 
-function Weather({ data }) {
+function Weather({ data, lat, lon }) {
     const [isOpen, setIsOpen] = useState(false);
 const [currentCity, setCurrentCity] = useState(null);
 
@@ -230,6 +231,7 @@ const postCity = async (city) => {
             </Container>
 </div>
           <Table open={isOpen} setOpen={setIsOpen} data={currentCity}></Table>
+          <Graph open={isOpen} setOpen={setIsOpen} lat={lat} lon={lon}></Graph>
         </>
     );
 }
