@@ -100,6 +100,18 @@ function Acount({ openA, setOpenA, isLogin, setIsLogin, open, setOpen }) {
     }
   }, []);
 
+  useEffect(() => {
+    if (openA) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [openA]);
+
   return (
     <Back open={openA} onClick={() => setOpenA(false)}>
       <Up onClick={(e) => e.stopPropagation()}>

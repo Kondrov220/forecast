@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 const Up = styled.div`
 border-radius: 25px;
 max-width: 600px;
+width:100%;
 height: 534px;
 background: #fff;
 display: flex;
@@ -44,19 +45,17 @@ font-size:12px;
 const Input = styled.input`
 border: 2px solid ${props => props.error ? "red" : "transparent"};
 border-radius: 10px;
-max-width: 440px;
+width:100%;
 height: 50px;
 background: #e4e4e4;
 margin-top:16px;
 margin-bottom:30px;
       @media (max-width: 768px) {
 border-radius: 10px;
-max-width: 310px;
 height: 40px;
 }
     @media (max-width: 425px) {
 border-radius: 10px;
-max-width: 243px;
 height: 40px;
   }
 `
@@ -103,6 +102,34 @@ z-index: 3;
 left:0;
 top:0;
 `
+
+const Li = styled.li`
+max-width: 440px;
+width:100%;
+      @media (max-width: 768px) {
+max-width: 310px;
+width:100%;
+}
+    @media (max-width: 425px) {
+max-width: 243px;
+width:100%;
+  }
+`
+
+const Ul = styled.ul`
+max-width: 440px;
+width:100%;
+      @media (max-width: 768px) {
+max-width: 310px;
+width:100%;
+}
+    @media (max-width: 425px) {
+max-width: 243px;
+width:100%;
+  }`
+
+
+
 
 function Sing({ open, setOpen, isLogin, setIsLogin, setIsLoginOpen  }) {
     const [emailValue, setEmailValue] = useState("");
@@ -162,6 +189,7 @@ function Sing({ open, setOpen, isLogin, setIsLogin, setIsLoginOpen  }) {
       }
     );
 
+    
     const data = await postRes.json();
     console.log("User added:", data);
     setOpen(false);
@@ -172,30 +200,36 @@ function Sing({ open, setOpen, isLogin, setIsLogin, setIsLoginOpen  }) {
   }
 };
 
-    if (open) {
-      document.body.style.overflow = "hidden"; 
-    } else {
-      document.body.style.overflow = "auto";  
-    }
+useEffect(() => {
+  if (open) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [open]);
 
   return (
     <Back open={open} onClick={() => setOpen(false)}>
     <Up onClick={(e) => e.stopPropagation()}>
       <Title>Sign up</Title>
-      <ul>
-        <li>
+      <Ul>
+        <Li>
             <Text>Username</Text>
             <Input type="text" value={nameValue} onChange={(e) => setNameValue(e.target.value)}/>
-        </li>
-        <li>
+        </Li>
+        <Li>
             <Text>E-Mail</Text>
             <Input type="email" value={emailValue} onChange={(e) => setEmailValue(e.target.value)} error={errorEmail}/>
-        </li>
-        <li>
+        </Li>
+        <Li>
             <Text>Password</Text>
             <Input type="password" value={passwordValue} onChange={(e) => setPasswordValue(e.target.value)} error={errorPassword}/>
-        </li>
-      </ul>
+        </Li>
+      </Ul>
       <Button onClick={handleSignUp}>Sign up</Button>
       <Texte>Already have an account? <Span     onClick={() => {
       setOpen(false);      

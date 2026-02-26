@@ -95,7 +95,6 @@ function Pets() {
   const PIXABAY_KEY = "50978158-2e1c075068d4fb19bda657fd9";
   const NEWS_KEY = "ef3e8b523a8342f999fac3a0887c1d2f";
 
-  // 🔹 Новини
   useEffect(() => {
     fetch(`https://newsapi.org/v2/everything?q=dog&apiKey=${NEWS_KEY}`)
       .then(res => res.json())
@@ -105,7 +104,6 @@ function Pets() {
       .catch(err => console.log(err));
   }, []);
 
-  // 🔹 Фото
   const getImages = async () => {
     try {
       const res = await fetch(
@@ -123,6 +121,7 @@ function Pets() {
   };
 
   return (
+    <div className="container">
     <Container>
       <Title>Interacting with our pets</Title>
 
@@ -138,7 +137,7 @@ function Pets() {
       </Ul>
 
       <Button onClick={getImages}>See more</Button>
-    </Container>
+    </Container></div>
   );
 }
 
