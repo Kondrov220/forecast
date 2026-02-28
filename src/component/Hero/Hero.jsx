@@ -131,16 +131,21 @@ border-radius: 5px;
 `
 
 const Button = styled.button`
+  &:hover {
+  img{
+       transform: scale(120%);
+}
+  }
 border-left: 2px solid #000;
 border-radius: 0 10px 10px 0;
-max-width: 45px;
+width: 45px;
 height: 100%;
 background: #ffb36c;
   position: absolute;
   right: 0px;
   top: 0px;
         @media (max-width: 768px) {
-max-width: 28px;
+        width: 28px;
 }
   @media (max-width: 425px) {
 max-width: 16px;
@@ -172,73 +177,60 @@ height: 9px;
 `
 
 function App() {
- const [value, setValue] = useState();
- const [data, setData] = useState([]);
- const [lat, setLat] = useState(null);
-const [lon, setLon] = useState(null);
+  const [value, setValue] = useState("");
+  const [data, setData] = useState([]);
+  const [lat, setLat] = useState(null);
+  const [lon, setLon] = useState(null);
   const API_KEY = "22e30256a6bc217554b8155e50f42d6c";
-const getCoordinates = async () => {
-  if (!value) return;
 
-  try {
-    const geoRes = await fetch(
-      `https://api.openweathermap.org/geo/1.0/direct?q=${value}&limit=1&appid=${API_KEY}`
-    );
+  const getCoordinates = async () => {
+    if (!value) return;
 
-    const geoData = await geoRes.json();
+    try {
+      const geoRes = await fetch(
+        `https://api.openweathermap.org/geo/1.0/direct?q=${value}&limit=1&appid=${API_KEY}`
+      );
+      const geoData = await geoRes.json();
+      if (!geoData.length) { alert("Місто не знайдено"); return; }
 
-    if (!geoData.length) {
-      alert("Місто не знайдено");
-      return;
-    }
+      const { lat, lon, name: cityName, country } = geoData[0];
+      setLat(lat);
+      setLon(lon);
 
-    const { lat, lon, name: cityName, country } = geoData[0];
+      const weatherRes = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
+      );
+      const weatherData = await weatherRes.json();
 
-    setLat(lat);
-    setLon(lon);
-    const weatherRes = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${API_KEY}`
-    );
+      // додати тільки унікальні міста
+      setData(prev => {
+        const exists = prev.find(item => item.name === cityName);
+        if (exists) return prev;
+        return [...prev, {
+          name: cityName,
+          country,
+          temp: weatherData.main.temp,
+          min: weatherData.main.temp_min,
+          max: weatherData.main.temp_max,
+          humidity: weatherData.main.humidity,
+          pressure: weatherData.main.pressure,
+          wind: weatherData.wind.speed,
+          visibility: weatherData.visibility
+        }];
+      });
 
-    const weatherData = await weatherRes.json();
-    setData(prev => [
-      ...prev,
-      {
-        name: cityName,
-        country,
-        temp: weatherData.main.temp,
-        min: weatherData.main.temp_min,
-        max: weatherData.main.temp_max,
-        humidity: weatherData.main.humidity,
-        pressure: weatherData.main.pressure,
-        wind: weatherData.wind.speed,
-        visibility: weatherData.visibility
+      const savedUser = JSON.parse(localStorage.getItem("user")) || {};
+      const cities = savedUser.city || [];
+      if (!cities.includes(cityName)) {
+        const updatedUser = { ...savedUser, city: [...cities, cityName] };
+        localStorage.setItem("user", JSON.stringify(updatedUser));
       }
-    ]);
-  const savedUser = JSON.parse(localStorage.getItem("user"));
 
-if (savedUser) {
-  const updatedUser = {
-    ...savedUser,
-    city: [...(savedUser.city || []), cityName]
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  await fetch(
-    `https://699dc3e283e60a406a475fc5.mockapi.io/sing/sing/${savedUser.id}`,
-    {
-      method: "PUT",  
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(updatedUser)
-    }
-  );
-
-  localStorage.setItem("user", JSON.stringify(updatedUser));
-}
-
-  } catch (error) {
-    console.error(error);
-  }
-};
   return (
     <>
     <Backgraund>
@@ -256,7 +248,7 @@ if (savedUser) {
       </Search>
       
     </Backgraund>
-    <Weather data={data} lat={lat} lon={lon}></Weather>
+    <Weather data={data} setData={setData} lat={lat} lon={lon}></Weather>
 </>
   );
 }

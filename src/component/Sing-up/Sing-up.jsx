@@ -61,6 +61,9 @@ height: 40px;
 `
 
 const Button = styled.button`
+  &:hover {
+       transform: scale(110%);
+  }
 margin-top:35px;
 border-radius: 10px;
 padding: 10px 30px;

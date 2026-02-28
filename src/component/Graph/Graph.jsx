@@ -62,7 +62,7 @@ function Graph({open, isOpen, lat, lon}) {
     });
 
     return () => {
-      chart.destroy(); // очищення при розмонтуванні
+      chart.destroy(); 
     };
   }, [weather]);
   return (

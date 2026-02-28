@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Table from "../Table/Table";
 import Graph from "../Graph/Graph";
+import Eight from "../Eight/Eight"
 import sun from '../../img/sun.png'
 import reset from '../../img/reset.png'
 import heart from '../../img/heart.png'
@@ -98,7 +99,9 @@ font-weight: 500;
 font-size: 10px;
 text-align: right;
 color: #000;
-
+  &:hover {
+       transform: scale(110%);
+  }
 `
 
 const Box = styled.div`
@@ -132,6 +135,7 @@ height: 24px;
 `
 
 const Div = styled.div`
+
 max-width: 280px;
 width:100%;
 display: flex;
@@ -156,27 +160,41 @@ margin-top: 15px;
 margin-bottom: 20px;
 `
 
-function Weather({ data, lat, lon }) {
-    const [isOpen, setIsOpen] = useState(false);
-const [currentCity, setCurrentCity] = useState(null);
-
-const postCity = async (city) => {
-  if (!city) return;
-  try {
-    const res = await fetch(
-      "https://699dc3e283e60a406a475fc5.mockapi.io/sing/sing/",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(city)
-      }
-    );
-    const data = await res.json();
-    console.log("City saved:", data);
-  } catch (err) {
-    console.error(err);
+const IconButton = styled.button`
+  &:hover {
+  img{
+       transform: scale(110%);
+       }
   }
-};
+`
+
+
+function Weather({ data, setData ,lat, lon }) {
+   const [isOpen, setIsOpen] = useState(false);
+  const [currentCity, setCurrentCity] = useState(null);
+
+  const savedUser = JSON.parse(localStorage.getItem("user")) || { city: [] };
+
+  const postCity = (city) => {
+    if (!city) return;
+
+  
+    const exists = data.find(item => item.name === city.name);
+    if (!exists) {
+      setData(prev => [...prev, city]);
+    }
+
+
+    if (!savedUser.city.includes(city.name)) {
+      const updatedUser = { ...savedUser, city: [...savedUser.city, city.name] };
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+    }
+  };
+
+  const deleteCity = (name) => {
+    setData(prev => prev.filter(item => item.name !== name));
+  };
+
     return (
         <>
          <div className="container">
@@ -208,22 +226,22 @@ const postCity = async (city) => {
                             </Temperature>
 
                             <Div>
-                                <button>
+                                <IconButton>
                                     <Img src={reset} alt="" />
-                                </button>
+                                </IconButton>
 
-                                <button onClick={() => postCity(item)}>
+                                <IconButton onClick={() => postCity(item, index)}>
                                     <Img src={heart} alt="" />
-                                </button>
+                                </IconButton>
 
                                 <Button onClick={() => {
                                     setCurrentCity(item);
                                     setIsOpen(true);
                                 }}>See more</Button>
 
-                                <button>
-                                    <Img src={delet} alt="" />
-                                </button>
+                                <IconButton>
+                                    <Img src={delet} alt="" onClick={deleteCity}/>
+                                </IconButton>
                             </Div>
                         </Li>
                     ))}
@@ -232,6 +250,7 @@ const postCity = async (city) => {
 </div>
           <Table open={isOpen} setOpen={setIsOpen} data={currentCity}></Table>
           <Graph open={isOpen} setOpen={setIsOpen} lat={lat} lon={lon}></Graph>
+          <Eight open={isOpen} setOpen={setIsOpen} lat={lat} lon={lon}></Eight>
         </>
     );
 }

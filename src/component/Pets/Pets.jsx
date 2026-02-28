@@ -1,91 +1,112 @@
 import styled from "styled-components";
-import { useState , useEffect} from "react";
-import cat from '../../img/cat.png'
-import dog from '../../img/dog.png'
-import ghosts from '../../img/ghosts.png'
-import man from '../../img/man.png'
+import { useState, useEffect } from "react";
 
 const Container = styled.div`
   max-width: 1140px;
   margin: 0 auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 0 15px;
   display: flex;
   flex-direction: column;
-      justify-content: center;
-    align-items: start;
-    margin-top: 60px;
-    margin-bottom: 80px;
- @media (max-width: 768px) {
-  padding-left: 0px;
-  padding-right: 0px;
-}
-`
+  justify-content: center;
+  align-items: start;
+  margin-top: 60px;
+  margin-bottom: 80px;
+
+  @media (max-width: 768px) {
+    padding: 0 10px;
+  }
+`;
 
 const Title = styled.p`
-font-family: var(--font-family);
-font-weight: 500;
-font-size: 20px;
-color: #000;
-margin-bottom:40px;
-@media (max-width: 768px) {
-font-size: 16px;
-margin-left:20px;
-}
-`
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  color: #000;
+  margin-bottom: 40px;
 
-const Text = styled.p`
-margin-top:20px;
-font-family: var(--font-family);
-font-weight: 500;
-font-size: 16px;
-color: #000;
-max-width:207px;
-            @media (max-width: 768px) {
-font-size: 12px;
-}
-  @media (max-width: 425px) {
-max-width:207px;
+  @media (max-width: 768px) {
+    font-size: 16px;
+    margin-left: 10px;
   }
-`
-const Button = styled.button`
-border-radius: 10px;
-padding: 8px 18px;
-background: #ffb36c;
-font-family: var(--font-family);
-font-weight: 500;
-font-size: 16px;
-color: #000;
-@media (max-width: 768px) {
-font-size: 12px;
-border-radius: 10px;
-padding: 8px 16px;
-max-width: 93px;
-height: 38px;
-margin-top:20px;
-margin-left:20px;
-}
-`
+`;
 
 const Ul = styled.ul`
-display: flex;
-flex-wrap:wrap;
-gap: 20px;
-      justify-content: center;
-    align-items: start;
-@media (max-width: 768px) {
-flex-wrap:wrap;
-      justify-content: center;
-    align-items: start;
-}
-`
+  display: grid;
+  gap: 20px;
+  padding: 0;
+  list-style: none;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 425px) {
+    grid-template-columns: 1fr;
+  }
+`;
 
 const Li = styled.li`
-display: flex;
+  display: flex;
   flex-direction: column;
-      justify-content: center;
-    align-items: center;
-`
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: translateY(-5px);
+    p {
+      max-height: 500px;
+      overflow: visible;
+    }
+  }
+
+  img {
+    border-radius: 10px;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+`;
+
+const Text = styled.p`
+  margin-top: 10px;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+
+  max-height: 40px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+`;
+
+const Button = styled.button`
+  border-radius: 10px;
+  padding: 8px 18px;
+  background: #ffb36c;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 16px;
+  color: #000;
+  margin-top: 20px;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+    padding: 8px 16px;
+  }
+`;
 
 function Pets() {
   const [images, setImages] = useState([]);
@@ -99,7 +120,8 @@ function Pets() {
         setArticles(data.articles || []);
       })
       .catch(err => console.log(err));
-      getImages();
+
+    getImages();
   }, []);
 
   const getImages = async () => {
@@ -107,36 +129,27 @@ function Pets() {
       const res = await fetch(
         `https://pixabay.com/api/?q=dogs&page=${page}&key=50978158-2e1c075068d4fb19bda657fd9&image_type=photo&orientation=horizontal&per_page=4`
       );
-
       const data = await res.json();
-
       setImages(prev => [...prev, ...data.hits]);
-      console.log(images);
       setPage(prev => prev + 1);
-
     } catch (error) {
       console.error(error);
     }
   };
 
   return (
-    <div className="container">
     <Container>
       <Title>Interacting with our pets</Title>
-
       <Ul>
         {images.map((img, index) => (
           <Li key={img.id}>
-            <img src={img.webformatURL} alt={img.tags} width="250" />
-            <Text>
-              {articles[index]?.description || "No description available"}
-            </Text>
+            <img src={img.webformatURL} alt={img.tags} />
+            <Text>{articles[index]?.description || "No description available"}</Text>
           </Li>
         ))}
       </Ul>
-
       <Button onClick={getImages}>See more</Button>
-    </Container></div>
+    </Container>
   );
 }
 

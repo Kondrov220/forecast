@@ -54,6 +54,9 @@ display:none;
 }
 `
 const Button = styled.button`
+  &:hover {
+       transform: scale(110%);
+  }
 display: ${props => (props.isLogin ? "none" : "flex")};
 max-width: 89px;
 height: 35px;
@@ -87,6 +90,9 @@ border-radius: 100%;
 `
 
 const IconButton = styled.button`
+  &:hover {
+       transform: scale(110%);
+  }
 max-width: 50px;
 height: 50px;
 background: transparent;

@@ -68,6 +68,9 @@ top:0;
 `
 
 const Button = styled.button`
+  &:hover {
+       transform: scale(110%);
+  }
 display: ${props => (props.isLogin ? "none" : "flex")};
 max-width: 89px;
 height: 35px;
