@@ -18,14 +18,17 @@ function Nature() {
   }, [images]);
         return (
           <div className="container">
-            <Carousel>
+            {images.length > 0 &&(
+                          <Carousel showThumbs={false}>
               {images.slice(0,10).map(item => (
                 <div>
                     <Img src={item.largeImageURL} />
                 </div>
               ))}
 
-            </Carousel></div>
+            </Carousel>
+            )}
+</div>
         );
     }
 
