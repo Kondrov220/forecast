@@ -109,46 +109,55 @@ const Button = styled.button`
 `;
 
 function Pets() {
-  const [images, setImages] = useState([]);
-  const [articles, setArticles] = useState([]);
+  const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    fetch('https://newsapi.org/v2/everything?q=dog&apiKey=ef3e8b523a8342f999fac3a0887c1d2f')
-      .then(res => res.json())
-      .then(data => {
-        setArticles(data.articles || []);
-      })
-      .catch(err => console.log(err));
-
-    getImages();
+    loadData();
   }, []);
 
-  const getImages = async () => {
+  const loadData = async () => {
     try {
-      const res = await fetch(
-        `https://pixabay.com/api/?q=dogs&page=${page}&key=50978158-2e1c075068d4fb19bda657fd9&image_type=photo&orientation=horizontal&per_page=4`
+      const currentPage = page;
+
+      const imageRes = await fetch(
+        `https://pixabay.com/api/?q=dogs&page=${currentPage}&key=50978158-2e1c075068d4fb19bda657fd9&image_type=photo&orientation=horizontal&per_page=4`
       );
-      const data = await res.json();
-      setImages(prev => [...prev, ...data.hits]);
+      const imageData = await imageRes.json();
+
+      const newsRes = await fetch(
+        `https://newsdata.io/api/1/latest?apikey=pub_3d09a4bc70224a32a63ce5add933b286&q=pets`
+      );
+      const newsData = await newsRes.json();
+
+      const newItems = imageData.hits.map((img, index) => ({
+        id: `${img.id}-${currentPage}-${index}`,
+        image: img.webformatURL,
+        text:
+          newsData.results?.[index]?.description ||
+          "No description available"
+      }));
+
+      setItems(prev => [...prev, ...newItems]);
       setPage(prev => prev + 1);
+      console.log(items)
     } catch (error) {
       console.error(error);
     }
   };
-
+  console.log(items)
   return (
     <Container>
       <Title>Interacting with our pets</Title>
       <Ul>
-        {images.map((img, index) => (
-          <Li key={img.id + index}>
-            <img src={img.webformatURL} alt={img.tags} />
-            <Text>{articles[index]?.description || "No description available"}</Text>
+        {items.map((item) => (
+          <Li key={item.id}>
+            <img src={item.image} alt="" />
+            <Text>{item.text || "No description available"}</Text>
           </Li>
         ))}
       </Ul>
-      <Button onClick={getImages}>See more</Button>
+      <Button onClick={loadData}>See more</Button>
     </Container>
   );
 }

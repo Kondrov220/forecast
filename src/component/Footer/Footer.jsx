@@ -48,7 +48,7 @@ margin-bottom:10px;
 font-size:12px;
   }
 `
-const Text = styled.p`
+const Text = styled.a`
 font-family: var(--second-family);
 font-weight: 500;
 font-size: 12px;
@@ -79,13 +79,13 @@ height: 67px;
 function Footer() {
   return (
     
-    <Foot>
+    <Foot id='footer'>
       <Logo src={logo} alt="" />
       <Box>
       <Title>Address</Title>
       <ul>
         <li>
-            <Text>Svobody str. 35</Text>
+            <Text href="https://maps.app.goo.gl/hFtjZrUW3g7ykFgw6">Svobody str. 35</Text>
         </li>
         <li>
             <Text>Kyiv</Text>
@@ -98,9 +98,9 @@ function Footer() {
       <Box>
       <Title>Contact us</Title>
       <Ul>
-        <li><img src={insta} alt="" /></li>
-        <li><img src={facebook} alt="" /></li>
-        <li><img src={whatsapp} alt="" /></li>
+        <li><a href="https://www.instagram.com"><img src={insta} alt="" /></a></li>
+        <li><a href="https://www.facebook.com"><img src={facebook} alt="" /></a></li>
+        <li><a href="https://www.whatsapp.com"><img src={whatsapp} alt="" /></a></li>
       </Ul>
       </Box>
     </Foot>

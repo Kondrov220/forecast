@@ -106,7 +106,7 @@ display:none;
 }
 `
 
-const Text = styled.p`
+const Text = styled.a`
 font-family: var(--second-family);
 font-weight: 500;
 font-size: 12px;
@@ -203,7 +203,7 @@ border-radius: 100%;
 }
 `
 
-const TextMenu = styled.p`
+const TextMenu = styled.a`
 
 display:none;
   @media (max-width: 425px) {
@@ -221,7 +221,7 @@ function Header({ isLogin, setIsLogin }) {
   const [isAcountOpen, setIsAcountOpen] = useState(false);
 const [isLoginOpen, setIsLoginOpen] = useState(false);
 const [menu, setMenu] = useState(false);
-
+localStorage.setItem("login", isLogin);
   return (
     <HeaderBox>
        <div className="container">
@@ -232,7 +232,7 @@ const [menu, setMenu] = useState(false);
             <Text>Who we are</Text>
           </li>
           <li>
-            <Text>Contacts</Text>
+            <Text  href='#footer'>Contacts</Text>
           </li>
           <li>
             <Text>Menu</Text>
@@ -255,10 +255,10 @@ const [menu, setMenu] = useState(false);
       </Container>        <MenuBox open={menu}>
            <BoxMenu>
           <li>
-            <TextMenu>Who we are</TextMenu>
+            <TextMenu> Who we are</TextMenu>
           </li>
           <li>
-            <TextMenu>Contacts</TextMenu>
+            <TextMenu  href='#footer'>Contacts</TextMenu>
           </li>
           <li>
             <TextMenu>Menu</TextMenu>

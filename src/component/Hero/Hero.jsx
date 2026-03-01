@@ -202,7 +202,6 @@ function App() {
       );
       const weatherData = await weatherRes.json();
 
-      // додати тільки унікальні міста
       setData(prev => {
         const exists = prev.find(item => item.name === cityName);
         if (exists) return prev;
