@@ -114,7 +114,7 @@ function Pets() {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    fetch(`https://newsapi.org/v2/everything?q=dog&apiKey=ef3e8b523a8342f999fac3a0887c1d2f`)
+    fetch('https://newsapi.org/v2/everything?q=dog&apiKey=ef3e8b523a8342f999fac3a0887c1d2f')
       .then(res => res.json())
       .then(data => {
         setArticles(data.articles || []);
@@ -142,7 +142,7 @@ function Pets() {
       <Title>Interacting with our pets</Title>
       <Ul>
         {images.map((img, index) => (
-          <Li key={img.id}>
+          <Li key={img.id + index}>
             <img src={img.webformatURL} alt={img.tags} />
             <Text>{articles[index]?.description || "No description available"}</Text>
           </Li>
